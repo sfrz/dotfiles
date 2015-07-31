@@ -1,0 +1,69 @@
+#!/bin/sh
+
+# Obliviousgmn, May 2015
+# https://github.com/ObliviousGmn
+# Lemonpop, Lemon scented popup bar.
+
+# Version 0.5.4
+
+. $HOME/Gmnbox/Panel/bar_config
+
+# Not the cleanest way but it works ..
+pkill -f -n "LMP"
+
+# Self Adjusting Width .. 
+POPW="$(($(echo "  $@ " | wc -m) * 6))"
+POPL="$((1910 - POPW))"
+
+# Magic ..
+Setup1="-g ${LW}x${LH}+${LX}+${LY} -f ${FONT1} -f ${FONT4} -B ${BG} -F ${FG} -d LMP"
+Setup2="-g ${POPW}x${LH}+${POPL}+${LY} -f ${FONT1} -f ${FONT4} -B ${BG} -F ${FG} -d LMP"
+Setup3="-g 300x30+810+120 -f ${FONT1} -f ${FONT4} -B ${BG} -F ${FG} -d -b LMP"
+
+# The Action
+case $1 in
+
+	-l) # Longer duration option ..
+	shift
+	(echo -e "%{F$YELLOW}%{c}$@"; sleep ${ZZZ}) | lemonbar ${Setup1} & 
+	;;
+
+#	Haven't found a use for it yet .. 
+#	-c) # Clickable option w/ long duration .. 
+#	shift
+#	(echo -e "%{F$YELLOW}%{c}$@"; sleep ${ZZZ}) | lemonbar ${Setup1} | while read line; do eval "$line"; done &
+#	;;
+
+	-w) # Quick weather ..
+	shift	
+	(echo -e "%{F$CYAN}%{c}%{F-}%{F$YELLOW} $(Weather 10039)"; sleep ${zzz}) | lemonbar ${Setup1} &
+	;;
+
+	-p) # Plex, I'm lazy..
+	shift
+	(echo -e "%{F$CYAN}%{c}%{F-}%{F$YELLOW} $@"; sleep ${zzz}) | lemonbar ${Setup2} &
+	;;
+
+	-wee) # Weechat notif ..
+	shift 
+	${Temple} &
+	(echo -e "%{F$CYAN}%{c}%{F-}%{F$YELLOW} $@"; sleep ${ZZZ}) | lemonbar ${Setup2} &
+	(echo -e "%{F$CYAN}  %{F-}%{F$YELLOW} $@" >> /tmp/Weelog) &
+	;;
+
+	-mus) # Music notfi ..
+	shift
+	(echo -e "%{F$CYAN}%{c}%{F-}%{F$YELLOW} $@"; sleep ${zzz}) | lemonbar ${Setup2} &
+	;;
+	
+	-s) # screenshot .. 
+	shift
+	(echo -e "%{F$CYAN}%{c}${F-}%{F$YELLOW} $@"; sleep ${zzz}) | lemonbar ${Setup1} &
+	;;
+
+	*) # Default option ..
+	(echo -e "%{F$YELLOW}%{c}$@"; sleep ${zzz}) | lemonbar ${Setup2} &
+	;;
+
+esac
+

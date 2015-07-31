@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# ObliviousGmn, April 2015
+# https://github.com/ObliviousGmn
+# Screenshot popup 
+
+scrot -d 1 -z -t 15 -q 100 '/home/sfrz/doc/%m_%d_%Y.png'\
+
+

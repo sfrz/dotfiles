@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# ObliviousGmn. April 2015
+# https://github.com/ObliviousGmn
+# i3lock - Lockscreen 
+
+Active="/tmp/Active.png"
+Static="/tmp/Static.png"
+Center="-gravity center -composite -matte"
+Pixel="-scale 10% -scale 1000% -fill black -colorize 25%"
+Wallpaper="$(cat $HOME/.xinitrc | awk '/hsetroot/ {print $3}')"
+CenterIMG="$HOME/Media/Tinalock_copy.png"
+
+active(){
+# Active Setup
+
+  	scrot -q 20 -z $Active
+	convert $Active $Pixel $Active
+
+  [ -f $CenterIMG ]
+	convert $Active $CenterIMG $Center $Active
+
+	i3lock -u -i $Active
+	rm $Active
+	exit 0
+}
+
+static(){
+# Static setup. Wallpaper only.
+
+  if [ -f $Static ]; then
+  	echo
+  else	
+	convert $Wallpaper $Pixel $Static
+
+  [[ -f $CenterIMG ]]
+	convert $Static $CenterIMG $Center $Static
+  fi
+	i3lock -u -i $Static
+	exit 0
+}
+
+remove(){
+# Remove Static.png In case you added a new wallpaper
+
+	rm $Static
+}
+
+usage(){
+	echo
+	echo " Lockscreen [ Active -a | Static -s | Clear -c ] "
+	echo
+}
+
+case $1 in
+	-h) usage ;;
+	-a) active ;;
+	-s) static ;;
+	-c) remove ;;
+esac
+

@@ -1,0 +1,121 @@
+#=================================#
+#||                             ||#
+#||  N C M P C P P  C O N F I G ||#
+#||                             ||#
+#=================================#
+##
+##### connection settings #####
+## set it in order to make tag editor and renaming files work properly
+mpd_host = "localhost"
+mpd_port = "6600"
+mpd_music_dir = "/mnt/document/My Document/My Music/Music"
+mpd_connection_timeout = "5"
+mpd_crossfade_time = "1"
+##### music visualizer #####
+##
+## Note: In order to make music visualizer work you'll
+## need to use mpd fifo output, whose format parameter
+## has to be set to 44100:16:1. Example configuration:
+## (it has to be put into mpd.conf)
+##
+## audio_output {
+##        type            "fifo"
+##        name            "My FIFO"
+##        path            "/tmp/mpd.fifo"
+##        format          "44100:16:1"
+## }
+##
+visualizer_fifo_path = "/tmp/mpd.fifo"
+##
+## Note: Below parameter is needed for ncmpcpp
+## to determine which output provides data for
+## visualizer and thus allow syncing between
+## visualization and sound as currently there
+## are some problems with it.
+##
+visualizer_output_name = "FIFO"
+##
+## Note: Below parameter defines how often ncmpcpp
+## has to "synchronize" visualizer and audio outputs.
+## 30 seconds is optimal value, but if you experience
+## synchronization problems, set it to lower value.
+## Keep in mind that sane values start with >=10.
+##
+visualizer_sync_interval = "25"
+##
+## Note: To enable spectrum frequency visualization
+## you need to compile ncmpcpp with fftw3 support.
+##
+visualizer_type = "wave" (spectrum/wave)
+##### system encoding #####
+##
+## ncmpcpp should detect your charset encoding
+## but if it failed to do so, you can specify
+## charset encoding you are using here.
+##
+## Note: You can see whether your ncmpcpp build
+## supports charset detection by checking output
+## of `ncmpcpp --version`.
+##
+## Note: Since MPD uses utf8 by default, setting
+## this option makes sense only if your encoding
+## is different.
+##
+system_encoding = "utf-8"
+##### delays #####
+## delay after playlist highlighting will be disabled (0 = don't disable)
+playlist_disable_highlight_delay = "5"
+## defines how long various messages are supposed to be visible
+message_delay_time = "4"
+
+# Playlist
+song_columns_list_format = "$L(9)[white]{l} (20)[red]{a} (30)[green]{b}$R(20)[cyan]{t}"
+now_playing_prefix = "$b#"
+#now_playing_subfix = "/$b"
+playlist_display_mode = "classic" (classic/columns)
+autocenter_mode = "yes"
+centered_cursor = "yes"
+cyclic_scrolling = "yes"
+mouse_list_scroll_whole_page = "no"
+#song_list_format = "{$8$9}{[%l] >> }{%t }$R{%a - %b}"
+song_list_format = " $5%l $1║{$7 %a $1│$2 %t$1 $R $3%b$1 }|{$6 %f $1}"
+#song_list_format = " $8%l $1│{$7 %a $1│$6 %t }|{$6 %f }$1 $R $1%b$1"
+#
+# song_library_format = "{%n > }{%t}|{%f}"
+#
+# # Bars
+song_status_format = "{%a - }{%t - }{%b}"
+#progressbar_look = "|> "
+#progressbar_look = "─╼ "
+progressbar_look = "░█ "
+titles_visibility = "no"
+header_visibility = "no"
+statusbar_visibility = "no" 
+
+# Browser
+browser_playlist_prefix = "$2plist »$9 "
+browser_display_mode = "classic" (classic/columns)
+
+# Colors
+discard_colors_if_item_is_selected = "yes"
+header_window_color = "default"
+volume_color = "cyan"
+state_line_color = "black"
+state_flags_color = "green"
+main_window_color = "default"
+color1 = "cyan"
+color2 = "black"
+main_window_highlight_color = "red"
+progressbar_color = "black"
+statusbar_color = "black"
+active_column_color = "red"
+visualizer_color = "cyan"
+
+# Others
+song_window_title_format = "MPD: {%a > }{%t}|{%f}"
+search_engine_display_mode = "columns" (classic/columns)
+follow_now_playing_lyrics = "yes"
+user_interface = "alternative" (classic/alternative)
+
+x
+

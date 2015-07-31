@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Obliviousgmn, April 2015
+# https://github.com/ObliviousGmn
+# Alert Popup - Sloppy 
+
+# Paths
+. $HOME/Gmnbox/Panel/bar_config
+ 
+function Alertpp {
+
+ALERT() {
+	wristwatch=$(date +%a_%R);
+	case "$wristwatch" in	
+		
+	'Tue_21:05'|'Tue_21:06')
+	        ${Beep} &	
+	        Lemonpop -l %{F$CYAN}  %{F-}%{F$YELLOW} Download Flash IPT!
+		;;
+
+	'Wed_21:05'|'Wed_21:06')
+ 	        ${Beep} &	
+	        Lemonpop -l %{F$CYAN}  %{F-}%{F$YELLOW} Downlaod Arrow IPT!
+		;;
+
+	'Wed_22:05'|'Wed_22:06')	
+ 	        ${Beep} &	
+	        Lemonpop -l %{F$CYAN}  %{F-}%{F$YELLOW} Download Supernatural IPT!
+		;;
+
+# Really here for testing..
+#	'Wed_10:28'|'Wed_10:29')
+#	        ${Beep} &
+#	        Lemonpop -l %{F$CYAN}  %{F-}%{F$YELLOW} Hi, My name is popup!
+#		;;
+
+esac
+}
+
+echo " $(ALERT) "
+
+}
+
+echo "$(Alertpp)"

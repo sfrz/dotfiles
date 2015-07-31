@@ -1,0 +1,72 @@
+#!/bin/bash
+# ObliviousGmn, ??? 2014
+# Volume - dzen volume bar
+
+# Customize this stuff
+. $HOME/Gmnbox/Panel/bar_config
+
+IF="Master"         # audio channel: Master|PCM
+SECS="1"            # sleep $SECS
+XPOS="10"           # horizontal positioning
+YPOS="37"           # vertical positioning
+HEIGHT="2"          # window height
+WIDTH="1900"        # window width
+
+#Probably do not customize
+PIPE="/tmp/dvolpipe"
+
+err() {
+  echo "$1"
+  exit 1
+}
+
+usage() {
+  echo "usage: dvol [option] [argument]"
+  echo
+  echo "Options:"
+  echo "     -i, --increase - increase volume by \`argument'"
+  echo "     -d, --decrease - decrease volume by \`argument'"
+  echo "     -t, --toggle   - toggle mute on and off"
+  echo "     -h, --help     - display this"
+  exit 
+}   
+    
+# Argument Parsing
+case "$1" in 
+  '-i'|'--increase')
+    [ -z "$2" ] && err "No argument specified for increase."
+    [ -n "$(tr -d [0-9] <<<$2)" ] && err "The argument needs to be an integer."
+    AMIXARG="${2}%+"
+    ;;
+  '-d'|'--decrease')
+    [ -z "$2" ] && err "No argument specified for decrease."
+    [ -n "$(tr -d [0-9] <<<$2)" ] && err "The argument needs to be an integer."
+    AMIXARG="${2}%-"
+    ;;
+  '-t'|'--toggle')
+    AMIXARG="toggle"
+    ;;
+  ''|'-h'|'--help')
+    usage
+    ;;
+  *)
+    err "Unrecognized option \`$1', see dvol --help"
+    ;;
+esac
+
+# Actual volume changing (readability low)
+AMIXOUT="$(amixer set "$IF" "$AMIXARG" | tail -n 1)"
+MUTE="$(cut -d '[' -f 4 <<<"$AMIXOUT")"
+VOL="$(cut -d '[' -f 2 <<<"$AMIXOUT" | sed 's/%.*//g')"
+
+# Using named pipe to determine whether previous call still exists
+# Also prevents multiple volume bar instances
+if [ ! -e "$PIPE" ]; then
+  mkfifo "$PIPE"
+  (dzen2 -tw "$WIDTH" -h "$HEIGHT" -x "$XPOS" -y "$YPOS" < "$PIPE"
+   rm -f "$PIPE") &
+fi
+
+#Feed the pipe!
+(echo "$VOL" | gdbar -fg "$BLUE" -bg "$BG" -h  "$HEIGHT" -w "$WIDTH" ; sleep "$SECS") > "$PIPE"
+
