@@ -1,0 +1,131 @@
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+ 
+Xft.dpi:                    96
+Xft.antialias:              true
+Xft.rgba:                   rgb
+Xft.hinting:                full
+Xft.hintstyle:              hintslight
+ 
+!-------------------------------------------------------------------------------
+! URxvt settings
+! Colours lifted from Solarized (http://ethanschoonover.com/solarized)
+! More info at:
+! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
+!-------------------------------------------------------------------------------
+ 
+URxvt.depth:                32
+URxvt.geometry:             100x30
+URxvt.transparent:          false
+URxvt.fading:               0
+! URxvt.urgentOnBell:         true
+! URxvt.visualBell:           true
+URxvt.loginShell:           true
+URxvt.saveLines:            50
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+ 
+! Fonts
+/* URxvt.font:                 -*-lucy-tewi2a-medium-r-normal--11-90-75-75-p-58-iso10646-1*/
+URxvt*font: xft:uushi:pixelsize=10
+URxvt*boldFont: xft:uushi:pixelsize=10
+!XTerm*font: xft:uushi:pixelsize=10
+!XTerm*boldFont: xft:uushi:pixelsize=10
+ 
+! Fix font space
+!URxvt*letterSpace: 1
+ 
+! Scrollbar
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+ 
+! Perl extensions
+URxvt.perl-lib:             /usr/lib/urxvt/perl/
+URxvt.perl-ext-common:      default,matcher,clipboard,keyboard-select,url-select
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          firefox
+URxvt.underlineURLs:        true
+URxvt.iso14755:             False
+URxvt*inheritPixmap:	    False
+URxvt*tintColor:		#404040
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.keysym.Shift-Control-C:   perl:clipboard:copy
+URxvt.keysym.Shift-Control-V:   perl:clipboard:paste
+
+! Cursor
+Xcursor.theme: OpenZone_White
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+urxvt*matcher.button:	1
+! Pointer
+URxvt.pointerBlank:         true
+ 
+#Rounded
+#ObliviousGmn
+xterm*termName: xterm-256color
+XTerm*locale: true
+!XTerm*foreground: rgb:ff/ff/ff
+!XTerm*background: rgb:1C/1C/23
+XTerm*foreground: rgb:a1/a1/a1
+XTerm*background: rgb:1c/1c/1c
+XTerm*color0: rgb:28/28/28
+
+! ...Lines omitted...
+XTerm*cursorColor: rgb:c7/a5/51
+XTerm*color15: rgb:e4/e4/e4
+xterm*faceName: uushi:size=10:antialias=false
+xterm*font: 7x13
+! Forbid bold font faces; bold type is light blue.
+XTerm*colorBDMode: true
+XTerm*colorBD: rgb:82/a4/d3
+! Do not underscore text, underlined text is white.
+XTerm*colorULMode: true
+XTerm*colorUL: rgb:6a/8c/8c
+XTerm*borderWidth: 0
+! -------- BASE -------- #
+*foreground:  #a1a1a1
+*background:  #1c1c1c
+*borderColor: #1c1c1c
+*cursorColor: #c7a551
+*colorUL:     #6a8c8c
+
+!black
+*color0:      #232323
+*color8:      #464646
+!red
+*color1:      #a04363
+*color9:      #ae837a
+!green
+*color2:      #9b9329
+*color10:     #b4aa30
+!yellow
+*color3:      #bf7a29
+*color11:     #c7a551
+!blue
+*color4:      #6a8c8c
+*color12:     #74999e
+!magenta
+*color5:      #856774
+*color13:     #9c818e
+!cyan
+*color6:      #757978
+*color14:     #9fa590
+!white
+!*color7:      #bcbcaf
+*color7:      #a1a1a1
+*color15:     #c1c4bc
+
+adgoSxBW.jpg
+
+
+URxvt.perl-ext-common : default,matcher
+URxvt.urlLauncher     : firefox
+URxvt.matcher.button  : 1
+
+! xterm ----------------------------------------------------------------------
+
+
